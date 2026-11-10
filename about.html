@@ -1,68 +1,300 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fff8fc">
-  <meta name="description" content="了解 StarMeet 星遇：一个让音乐连接新朋友的社交娱乐产品原型。">
-  <title>关于我们 - StarMeet 星遇</title>
-  <style>
-    :root { --ink:#342a40;--muted:#766b80;--purple:#8456d8;--pink:#f27ea9;--line:#f0e7f2; }
-    * { box-sizing:border-box; }
-    body { margin:0;color:var(--ink);background:#fff9fc;font-family:ui-rounded,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.7; }
-    a { color:inherit;text-decoration:none; }
-    .shell { width:min(920px,calc(100% - 40px));margin:0 auto; }
-    header { border-bottom:1px solid var(--line);background:#ffffffa8; }
-    nav { min-height:78px;display:flex;align-items:center;justify-content:space-between; }
-    .brand { display:flex;align-items:center;gap:11px;font-size:19px;font-weight:800; }
-    .mark { display:grid;place-items:center;width:39px;height:39px;border-radius:14px;color:#fff;background:linear-gradient(140deg,#a77bea,#f58db4); }
-    .brand small { display:block;margin-top:-4px;color:var(--muted);font-size:10px;letter-spacing:.18em; }
-    .back { color:var(--purple);font-size:14px;font-weight:700; }
-    main { padding:76px 0 90px; }
-    .eyebrow { display:inline-block;padding:6px 13px;border:1px solid #eee1fa;border-radius:99px;color:#7851bc;background:#fff;font-size:12px;font-weight:750; }
-    h1 { margin:18px 0 14px;font-size:clamp(40px,7vw,62px);line-height:1.15;letter-spacing:-.05em; }
-    .gradient { color:var(--purple);background:linear-gradient(105deg,#8154d3 15%,#ec78a8 85%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent; }
-    .lead { max-width:690px;color:var(--muted);font-size:18px; }
-    .story { display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:45px; }
-    .card { padding:27px;border:1px solid #f1e8f2;border-radius:23px;background:#fff;box-shadow:0 8px 26px #654c7610; }
-    .icon { display:grid;place-items:center;width:48px;height:48px;margin-bottom:14px;border-radius:16px;background:#f5eaff;font-size:23px; }
-    h2 { margin:0 0 9px;font-size:20px; }
-    .card p { margin:0;color:var(--muted);font-size:14px; }
-    .values { margin-top:52px;padding:33px;border-radius:26px;background:linear-gradient(120deg,#f1e8ff,#fff0f5); }
-    .values h2 { margin-bottom:17px; }
-    .value-list { display:grid;grid-template-columns:repeat(3,1fr);gap:20px; }
-    .value-list strong { display:block;margin-bottom:5px; }
-    .value-list span { color:var(--muted);font-size:13px; }
-    footer { border-top:1px solid var(--line);padding:25px 0;color:#8b8090;font-size:12px; }
-    :focus-visible { outline:3px solid #b594ee;outline-offset:3px; }
-    @media(max-width:620px) { .shell { width:calc(100% - 30px); } main { padding:53px 0 65px; }.story { grid-template-columns:1fr; }.values { padding:25px 21px; }.value-list { grid-template-columns:1fr;gap:15px; }.lead { font-size:16px; } }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="关于 StarMeet 星遇：社交K歌直播产品展示原型介绍。" />
+    <title>关于我们 - StarMeet 星遇</title>
+    <style>
+        :root {
+            --bg: #fffafc;
+            --panel: #ffffff;
+            --pink-1: #ffe7f4;
+            --pink-2: #f9d5ff;
+            --purple: #9a62d6;
+            --purple-deep: #6d3bb0;
+            --text: #2d2333;
+            --text-soft: #6a6172;
+            --line: #f1e9f6;
+            --shadow: 0 18px 40px rgba(122, 81, 160, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #fffafc 0%, #fff7ff 100%);
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(980px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(255,255,255,0.76);
+            border-bottom: 1px solid rgba(154, 98, 214, 0.08);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--purple-deep);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #f7d1ff, #b88ae7);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            color: var(--text-soft);
+            flex-wrap: wrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-deep);
+        }
+
+        .hero {
+            padding: 56px 0 30px;
+        }
+
+        .hero-panel {
+            background: linear-gradient(135deg, #fff2fa, #ffffff 42%, #f6f0ff 100%);
+            border: 1px solid var(--line);
+            border-radius: 32px;
+            padding: 42px 32px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #fff2fb;
+            border: 1px solid #f0dff1;
+            color: var(--purple-deep);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 18px 0 12px;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            letter-spacing: -0.05em;
+            line-height: 1.08;
+        }
+
+        .hero-panel p {
+            margin: 0 auto;
+            max-width: 680px;
+            color: var(--text-soft);
+            font-size: 1.05rem;
+        }
+
+        main {
+            padding-bottom: 40px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 26px 22px;
+            box-shadow: 0 12px 24px rgba(118, 90, 146, 0.04);
+        }
+
+        .card h2 {
+            margin: 0 0 12px;
+            font-size: 1.5rem;
+            color: var(--purple-deep);
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--text-soft);
+        }
+
+        .values {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .value {
+            background: #fff7fd;
+            border: 1px solid #f4eaff;
+            border-radius: 18px;
+            padding: 18px 16px;
+        }
+
+        .value h3 {
+            margin: 0 0 8px;
+            color: var(--purple-deep);
+            font-size: 1.08rem;
+        }
+
+        .value p {
+            margin: 0;
+            color: var(--text-soft);
+            font-size: 0.94rem;
+        }
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 20px;
+            margin-top: 26px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #b57ae8, #8b5dd5);
+            color: white;
+            font-weight: 800;
+            box-shadow: 0 14px 24px rgba(140, 93, 213, 0.22);
+        }
+
+        footer {
+            padding: 28px 0 52px;
+            text-align: center;
+            color: var(--text-soft);
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 760px) {
+            .row,
+            .values {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                flex-wrap: wrap;
+                padding: 12px 0;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <nav class="shell" aria-label="主导航">
-      <a class="brand" href="index.html"><span class="mark" aria-hidden="true">✦</span><span>StarMeet<small>星 遇</small></span></a>
-      <a class="back" href="index.html">← 返回首页</a>
-    </nav>
-  </header>
-  <main class="shell">
-    <span class="eyebrow">关于 StarMeet</span>
-    <h1>让音乐连接，<br><span class="gradient">让相遇发生。</span></h1>
-    <p class="lead">星遇是一个围绕音乐与兴趣展开的社交娱乐产品原型。我们想把 K 歌、直播、短视频和真诚交流放在一起，让认识新朋友这件事变得更自然、更有趣。</p>
-    <div class="story">
-      <article class="card"><div class="icon" aria-hidden="true">💭</div><h2>我们的想法</h2><p>一首喜欢的歌，常常就是一段对话的开始。星遇希望给每个人一个轻松表达自己的空间，不必刻意，找到同频就很好。</p></article>
-      <article class="card"><div class="icon" aria-hidden="true">🌱</div><h2>我们在做什么</h2><p>探索更温暖的线上互动方式：和朋友一起唱歌、走进有趣的直播间、分享日常片段，也遇见拥有相似热爱的人。</p></article>
-    </div>
-    <section class="values">
-      <h2>星遇相信</h2>
-      <div class="value-list">
-        <div><strong>真诚相遇</strong><span>从共同喜欢的事开始，舒服地认识彼此。</span></div>
-        <div><strong>自在表达</strong><span>唱得开心、分享得尽兴，每个人都有自己的舞台。</span></div>
-        <div><strong>温柔陪伴</strong><span>让每一次互动都友善、尊重，也值得期待。</span></div>
-      </div>
-    </section>
-    <p style="margin:30px 0 0;color:#8b8090;font-size:13px">本网站为技术学习演示原型，不代表正式商业服务。App 下载入口将在产品正式发布后更新。</p>
-  </main>
-  <footer><div class="shell">© 2026 StarMeet 星遇 · 学习演示项目</div></footer>
+    <header>
+        <div class="container nav">
+            <a href="index.html" class="brand" aria-label="StarMeet 首页">
+                <span class="brand-mark">✦</span>
+                <span>StarMeet 星遇</span>
+            </a>
+            <nav class="nav-links" aria-label="导航">
+                <a href="index.html">首页</a>
+                <a href="about.html">关于我们</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container hero">
+            <section class="hero-panel">
+                <div class="eyebrow">About Us</div>
+                <h1>让每一次相遇，都从喜欢开始</h1>
+                <p>
+                    StarMeet 星遇是一款聚焦音乐、社交和直播的年轻化娱乐原型产品，
+                    让用户在轻松的互动氛围中发现共同兴趣、建立信任关系与温暖连接。
+                </p>
+            </section>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <section class="card">
+                    <h2>我们是谁</h2>
+                    <p>
+                        我们希望用简洁、友善、充满想象力的方式，打造一个围绕K歌、直播与兴趣社区的社交体验。
+                        这个项目的目标，是展示一种真实、年轻、充满乐趣的线上相遇方式。
+                    </p>
+                </section>
+
+                <section class="card">
+                    <h2>我们想做什么</h2>
+                    <p>
+                        让人们不用刻意“认识”，就能自然发现相同的音乐爱好、相似的生活节奏，
+                        以及彼此喜欢的内容表达方式。
+                    </p>
+                </section>
+            </div>
+
+            <section class="card" style="margin-top: 24px;">
+                <h2>产品价值</h2>
+                <div class="values">
+                    <article class="value">
+                        <h3>🎤 一起欢唱</h3>
+                        <p>让音乐变成连接人与人之间的桥梁。</p>
+                    </article>
+                    <article class="value">
+                        <h3>✨ 轻松交流</h3>
+                        <p>把交友变成自然、舒服、低门槛的体验。</p>
+                    </article>
+                    <article class="value">
+                        <h3>💜 共同兴趣</h3>
+                        <p>围绕内容、声音和生活刺激真实连接。</p>
+                    </article>
+                </div>
+            </section>
+
+            <div style="text-align: center;">
+                <a class="back" href="index.html">← 返回首页</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        StarMeet 星遇 · 学习演示项目
+    </footer>
 </body>
 </html>
