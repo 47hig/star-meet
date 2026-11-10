@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8fc">
+  <meta name="description" content="了解 StarMeet 星遇：一个让音乐连接新朋友的社交娱乐产品原型。">
+  <title>关于我们 - StarMeet 星遇</title>
+  <style>
+    :root { --ink:#342a40;--muted:#766b80;--purple:#8456d8;--pink:#f27ea9;--line:#f0e7f2; }
+    * { box-sizing:border-box; }
+    body { margin:0;color:var(--ink);background:#fff9fc;font-family:ui-rounded,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.7; }
+    a { color:inherit;text-decoration:none; }
+    .shell { width:min(920px,calc(100% - 40px));margin:0 auto; }
+    header { border-bottom:1px solid var(--line);background:#ffffffa8; }
+    nav { min-height:78px;display:flex;align-items:center;justify-content:space-between; }
+    .brand { display:flex;align-items:center;gap:11px;font-size:19px;font-weight:800; }
+    .mark { display:grid;place-items:center;width:39px;height:39px;border-radius:14px;color:#fff;background:linear-gradient(140deg,#a77bea,#f58db4); }
+    .brand small { display:block;margin-top:-4px;color:var(--muted);font-size:10px;letter-spacing:.18em; }
+    .back { color:var(--purple);font-size:14px;font-weight:700; }
+    main { padding:76px 0 90px; }
+    .eyebrow { display:inline-block;padding:6px 13px;border:1px solid #eee1fa;border-radius:99px;color:#7851bc;background:#fff;font-size:12px;font-weight:750; }
+    h1 { margin:18px 0 14px;font-size:clamp(40px,7vw,62px);line-height:1.15;letter-spacing:-.05em; }
+    .gradient { color:var(--purple);background:linear-gradient(105deg,#8154d3 15%,#ec78a8 85%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent; }
+    .lead { max-width:690px;color:var(--muted);font-size:18px; }
+    .story { display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:45px; }
+    .card { padding:27px;border:1px solid #f1e8f2;border-radius:23px;background:#fff;box-shadow:0 8px 26px #654c7610; }
+    .icon { display:grid;place-items:center;width:48px;height:48px;margin-bottom:14px;border-radius:16px;background:#f5eaff;font-size:23px; }
+    h2 { margin:0 0 9px;font-size:20px; }
+    .card p { margin:0;color:var(--muted);font-size:14px; }
+    .values { margin-top:52px;padding:33px;border-radius:26px;background:linear-gradient(120deg,#f1e8ff,#fff0f5); }
+    .values h2 { margin-bottom:17px; }
+    .value-list { display:grid;grid-template-columns:repeat(3,1fr);gap:20px; }
+    .value-list strong { display:block;margin-bottom:5px; }
+    .value-list span { color:var(--muted);font-size:13px; }
+    footer { border-top:1px solid var(--line);padding:25px 0;color:#8b8090;font-size:12px; }
+    :focus-visible { outline:3px solid #b594ee;outline-offset:3px; }
+    @media(max-width:620px) { .shell { width:calc(100% - 30px); } main { padding:53px 0 65px; }.story { grid-template-columns:1fr; }.values { padding:25px 21px; }.value-list { grid-template-columns:1fr;gap:15px; }.lead { font-size:16px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="shell" aria-label="主导航">
+      <a class="brand" href="index.html"><span class="mark" aria-hidden="true">✦</span><span>StarMeet<small>星 遇</small></span></a>
+      <a class="back" href="index.html">← 返回首页</a>
+    </nav>
+  </header>
+  <main class="shell">
+    <span class="eyebrow">关于 StarMeet</span>
+    <h1>让音乐连接，<br><span class="gradient">让相遇发生。</span></h1>
+    <p class="lead">星遇是一个围绕音乐与兴趣展开的社交娱乐产品原型。我们想把 K 歌、直播、短视频和真诚交流放在一起，让认识新朋友这件事变得更自然、更有趣。</p>
+    <div class="story">
+      <article class="card"><div class="icon" aria-hidden="true">💭</div><h2>我们的想法</h2><p>一首喜欢的歌，常常就是一段对话的开始。星遇希望给每个人一个轻松表达自己的空间，不必刻意，找到同频就很好。</p></article>
+      <article class="card"><div class="icon" aria-hidden="true">🌱</div><h2>我们在做什么</h2><p>探索更温暖的线上互动方式：和朋友一起唱歌、走进有趣的直播间、分享日常片段，也遇见拥有相似热爱的人。</p></article>
+    </div>
+    <section class="values">
+      <h2>星遇相信</h2>
+      <div class="value-list">
+        <div><strong>真诚相遇</strong><span>从共同喜欢的事开始，舒服地认识彼此。</span></div>
+        <div><strong>自在表达</strong><span>唱得开心、分享得尽兴，每个人都有自己的舞台。</span></div>
+        <div><strong>温柔陪伴</strong><span>让每一次互动都友善、尊重，也值得期待。</span></div>
+      </div>
+    </section>
+    <p style="margin:30px 0 0;color:#8b8090;font-size:13px">本网站为技术学习演示原型，不代表正式商业服务。App 下载入口将在产品正式发布后更新。</p>
+  </main>
+  <footer><div class="shell">© 2026 StarMeet 星遇 · 学习演示项目</div></footer>
+</body>
+</html>
