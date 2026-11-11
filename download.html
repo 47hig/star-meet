@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>下载 StarMeet 星遇</title>
+  <style>
+    :root {
+      --bg: #fffafc;
+      --panel: #ffffff;
+      --pink-1: #ffe7f4;
+      --pink-2: #f9d5ff;
+      --pink-3: #d98df7;
+      --purple: #9a62d6;
+      --purple-deep: #6d3bb0;
+      --orange: #ffbf7a;
+      --text: #2d2333;
+      --text-soft: #6a6172;
+      --line: #f1e9f6;
+      --shadow: 0 18px 40px rgba(122, 81, 160, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #fffafc 0%, #fff6fd 32%, #fdf7ff 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.76);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(154, 98, 214, 0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--purple-deep);
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f7d1ff, #b88ae7);
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      color: var(--text-soft);
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover { color: var(--purple-deep); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 42px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ba7de9, #9a62d6);
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 12px 24px rgba(154, 98, 214, 0.2);
+    }
+
+    .hero {
+      padding: 72px 0 24px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: #fff0fb;
+      border: 1px solid #f2d8ef;
+      color: var(--purple-deep);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 18px;
+      font-size: clamp(2.7rem, 5vw, 4.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+    }
+
+    .highlight { color: var(--purple); }
+
+    .subtitle {
+      max-width: 620px;
+      margin: 0 0 26px;
+      color: var(--text-soft);
+      font-size: 1.08rem;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 26px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #b57ae8, #8a5ad5);
+      color: white;
+      box-shadow: 0 18px 30px rgba(138, 90, 213, 0.28);
+    }
+
+    .btn-secondary {
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--purple-deep);
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+    }
+
+    .meta strong {
+      display: inline-block;
+      color: var(--text);
+      margin-right: 4px;
+    }
+
+    .download-panel {
+      background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.92));
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f9ebff;
+      color: var(--purple-deep);
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .version-box {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .version-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px 16px;
+    }
+
+    .version-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .version-item p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+    }
+
+    .section {
+      padding: 42px 0 12px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .section-header h2 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-header p {
+      margin: 0 auto;
+      max-width: 700px;
+      color: var(--text-soft);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px 22px;
+      box-shadow: 0 10px 24px rgba(124, 96, 160, 0.04);
+    }
+
+    .feature-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, #ffe6f5, #f4e6ff);
+    }
+
+    .feature-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.16rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.96rem;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, #f9ecff, #f1f4ff 35%, #fff0e3 100%);
+      border: 1px solid rgba(154, 98, 214, 0.12);
+      border-radius: 30px;
+      padding: 28px;
+      margin: 26px 0 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+    }
+
+    .info-grid h3 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+    }
+
+    .info-grid ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text-soft);
+    }
+
+    .info-grid li + li {
+      margin-top: 8px;
+    }
+
+    footer {
+      padding: 18px 0 52px;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 820px) {
+      .hero-inner,
+      .info-grid,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .nav {
+        flex-wrap: wrap;
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .version-box {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="StarMeet 首页">
+        <span class="brand-mark">✦</span>
+        <span>StarMeet 星遇</span>
+      </a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="index.html">首页</a>
+        <a href="index.html#features">功能</a>
+        <a href="download.html">下载</a>
+      </nav>
+      <a class="nav-cta" href="download.html">立即下载</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <div class="eyebrow">StarMeet · 下载中心</div>
+          <h1>下载 <span class="highlight">StarMeet</span> 原型包</h1>
+          <p class="subtitle">
+            这里提供 StarMeet 星遇 的产品演示包与展示入口，用于学习、演示与原型展示。
+            仅用于产品概念验证与前端演示，非商业发布版本。
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#download-package">下载原型包</a>
+            <a class="btn btn-secondary" href="index.html">返回首页</a>
+          </div>
+
+          <div class="meta">
+            <span><strong>版本</strong>v1.0 Demo</span>
+            <span><strong>更新</strong>2026.11</span>
+            <span><strong>状态</strong>学习演示</span>
+          </div>
+        </div>
+
+        <div class="download-panel" id="download-package">
+          <div class="badge">Demo Package</div>
+          <div style="font-size:2rem; font-weight:800; color: var(--purple-deep);">StarMeet 星遇</div>
+          <div style="margin-top: 8px; color: var(--text-soft);">社交 K 歌直播原型展示包</div>
+
+          <div class="version-box">
+            <div class="version-item">
+              <h3>Web 版</h3>
+              <p>适合 GitHub Pages 部署，直接浏览访问展示。</p>
+            </div>
+            <div class="version-item">
+              <h3>App 原型</h3>
+              <p>适用于产品演示与需求沟通，视觉效果更完整。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>下载内容说明</h2>
+          <p>原型包仅用于学习演示，覆盖产品首页展示与功能体验概念，不包含真实业务闭环或商用资源。</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">🎤</div>
+            <h3>社交 K 歌</h3>
+            <p>包含 K 歌房、点歌互动与语音/直播场景的界面演示元素。</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">📡</div>
+            <h3>直播互动</h3>
+            <p>展示实时直播、弹幕和礼物互动的原型内容，突出社交热度感。</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3>社交发现</h3>
+            <p>用于呈现兴趣匹配、短视频和直播社区的概念展示，凸显“同频连接”。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="info-box">
+          <div class="info-grid">
+            <div>
+              <h3>适用场景</h3>
+              <ul>
+                <li>产品展示页 / 学习作品演示</li>
+                <li>前端静态页面训练与部署练习</li>
+                <li>概念原型评审与沟通材料</li>
+              </ul>
+            </div>
+            <div>
+              <h3>使用说明</h3>
+              <ul>
+                <li>仅做演示用途，不适用于正式商用发布</li>
+                <li>本项目不含登录、支付、后台管理等真实业务模块</li>
+                <li>代码可按需修改，适合二次学习与扩展</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 StarMeet 星遇 · Demo Project For Learning
+  </footer>
+</body>
+</html>
