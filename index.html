@@ -1,73 +1,924 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="StarMeet 星遇，社交K歌直播原型网站，展示产品功能与下载入口。" />
     <title>StarMeet 星遇 - 社交K歌直播</title>
     <style>
-        * {margin:0;padding:0;box-sizing:border-box;font-family:system-ui, -apple-system, sans-serif;}
-        body {background:#fef7ff;color:#333;}
-        nav {display:flex;justify-content:space-between;align-items:center;padding:20px 24px;max-width:1100px;margin:0 auto;}
-        .logo {font-size:22px;font-weight:bold;color:#9955cc;}
-        .nav-link a {margin-left:24px;color:#555;text-decoration:none;}
-        .hero {text-align:center;padding:70px 20px;}
-        .hero h1 {font-size:40px;color:#8844bb;margin-bottom:16px;}
-        .hero p {font-size:18px;color:#666;max-width:600px;margin:0 auto 32px;}
-        .btn {display:inline-block;background:#b886eb;color:white;padding:14px 32px;border-radius:999px;text-decoration:none;font-weight:500;}
-        .container {max-width:1100px;margin:0 auto;padding:40px 24px;}
-        .section-title {text-align:center;font-size:26px;color:#8844bb;margin-bottom:36px;}
-        .grid {display:grid;grid-template-columns:repeat(auto-fit, minmax(240px,1fr));gap:24px;}
-        .card {background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 14px rgba(0,0,0,0.08);}
-        .card h3 {color:#9955cc;margin-bottom:10px;}
-        footer {text-align:center;padding:40px 20px;color:#888;font-size:14px;margin-top:30px;}
+        :root {
+          --bg: #fffafc;
+          --panel: #ffffff;
+          --pink-1: #ffe7f4;
+          --pink-2: #f9d5ff;
+          --pink-3: #d98df7;
+          --purple: #9a62d6;
+          --purple-deep: #6d3bb0;
+          --orange: #ffbf7a;
+          --text: #2d2333;
+          --text-soft: #6a6172;
+          --line: #f1e9f6;
+          --shadow: 0 18px 40px rgba(122, 81, 160, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          margin: 0;
+          font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+          background: linear-gradient(180deg, #fff9fd 0%, #fffafc 30%, #fdf7ff 100%);
+          color: var(--text);
+          line-height: 1.7;
+        }
+
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+
+        img {
+          max-width: 100%;
+          display: block;
+        }
+
+        .container {
+          width: min(1180px, calc(100% - 32px));
+          margin: 0 auto;
+        }
+
+        header {
+          position: sticky;
+          top: 0;
+          z-index: 10;
+          backdrop-filter: blur(12px);
+          background: rgba(255, 255, 255, 0.72);
+          border-bottom: 1px solid rgba(154, 98, 214, 0.08);
+        }
+
+        .nav {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          min-height: 76px;
+          gap: 24px;
+        }
+
+        .brand {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-weight: 800;
+          font-size: 1.2rem;
+          color: var(--purple-deep);
+        }
+
+        .brand-mark {
+          width: 42px;
+          height: 42px;
+          display: grid;
+          place-items: center;
+          border-radius: 14px;
+          background: linear-gradient(135deg, #f7d1ff, #b88ae7);
+          color: white;
+          box-shadow: var(--shadow);
+          font-size: 1.2rem;
+        }
+
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 22px;
+          flex-wrap: wrap;
+          color: var(--text-soft);
+          font-size: 0.96rem;
+        }
+
+        .nav-links a:hover {
+          color: var(--purple-deep);
+        }
+
+        .nav-cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          height: 42px;
+          padding: 0 20px;
+          border-radius: 999px;
+          background: linear-gradient(135deg, #ba7de9, #9a62d6);
+          color: white;
+          font-weight: 700;
+          box-shadow: 0 12px 24px rgba(154, 98, 214, 0.22);
+        }
+
+        .hero {
+          padding: 64px 0 28px;
+        }
+
+        .hero-inner {
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          align-items: center;
+          gap: 44px;
+        }
+
+        .eyebrow {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 7px 14px;
+          border-radius: 999px;
+          background: #fff0fb;
+          border: 1px solid #f2d8ef;
+          color: var(--purple-deep);
+          font-weight: 700;
+          font-size: 0.78rem;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+        }
+
+        h1 {
+          margin: 18px 0 16px;
+          font-size: clamp(2.5rem, 5vw, 4.6rem);
+          line-height: 1.08;
+          letter-spacing: -0.05em;
+        }
+
+        .headline-highlight {
+          color: var(--purple);
+        }
+
+        .subtitle {
+          max-width: 610px;
+          color: var(--text-soft);
+          font-size: 1.08rem;
+          margin-bottom: 28px;
+        }
+
+        .cta-row {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 16px 28px;
+          border-radius: 999px;
+          font-weight: 800;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+          transform: translateY(-1px);
+        }
+
+        .btn-primary {
+          background: linear-gradient(135deg, #b57ae8, #8a5ad5);
+          color: white;
+          box-shadow: 0 18px 30px rgba(138, 90, 213, 0.28);
+        }
+
+        .btn-secondary {
+          background: #fff;
+          border: 1px solid var(--line);
+          color: var(--purple-deep);
+        }
+
+        .mini-stats {
+          margin-top: 32px;
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          flex-wrap: wrap;
+          color: var(--text-soft);
+          font-size: 0.95rem;
+        }
+
+        .mini-stats strong {
+          display: block;
+          color: var(--text);
+          font-size: 1.4rem;
+          margin-bottom: 4px;
+        }
+
+        .phone-wrap {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 620px;
+        }
+
+        .glow {
+          position: absolute;
+          width: 400px;
+          height: 400px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(197, 122, 245, 0.42), rgba(197, 122, 245, 0));
+          filter: blur(26px);
+          top: 16%;
+          right: 8%;
+        }
+
+        .phone {
+          position: relative;
+          width: min(400px, 72vw);
+          aspect-ratio: 0.52;
+          padding: 18px 16px 16px;
+          border-radius: 38px;
+          background: linear-gradient(160deg, #1d1730, #2e2544);
+          box-shadow: 0 30px 60px rgba(41, 28, 68, 0.22);
+          border: 1px solid rgba(255,255,255,0.08);
+          z-index: 1;
+        }
+
+        .screen {
+          height: 100%;
+          border-radius: 26px;
+          background: linear-gradient(180deg, #ffedf9, #f5f0ff 32%, #f7f6ff 100%);
+          overflow: hidden;
+          position: relative;
+        }
+
+        .topbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 18px 18px 10px;
+          color: var(--purple-deep);
+          font-weight: 700;
+        }
+
+        .topbar .dots {
+          display: flex;
+          gap: 6px;
+        }
+
+        .topbar .dots span {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #d7b9ed;
+          display: inline-block;
+        }
+
+        .avatar-band {
+          display: flex;
+          gap: 12px;
+          padding: 10px 18px;
+          align-items: center;
+        }
+
+        .avatar {
+          width: 56px;
+          height: 56px;
+          border-radius: 18px;
+          background: linear-gradient(135deg, #ffd6ef, #dca8ff);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .avatar::before {
+          content: "";
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.7);
+          top: 11px;
+          left: 18px;
+        }
+
+        .avatar::after {
+          content: "";
+          position: absolute;
+          width: 34px;
+          height: 20px;
+          border-radius: 18px 18px 12px 12px;
+          background: rgba(255,255,255,0.65);
+          left: 11px;
+          bottom: 8px;
+        }
+
+        .person-card {
+          flex: 1;
+          background: rgba(255,255,255,0.8);
+          border: 1px solid rgba(159, 98, 212, 0.12);
+          border-radius: 18px;
+          padding: 10px 12px;
+        }
+
+        .tag {
+          display: inline-block;
+          padding: 6px 10px;
+          border-radius: 999px;
+          background: #f9ebff;
+          color: var(--purple-deep);
+          font-size: 0.72rem;
+          font-weight: 700;
+        }
+
+        .song-card {
+          margin: 16px 18px 0;
+          background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.92));
+          border: 1px solid rgba(142,95,195,0.08);
+          border-radius: 24px;
+          padding: 16px;
+          display: grid;
+          grid-template-columns: 64px 1fr auto;
+          gap: 12px;
+          align-items: center;
+        }
+
+        .album {
+          width: 64px;
+          height: 64px;
+          border-radius: 18px;
+          background: linear-gradient(135deg, #f7d5ed, #d1a1ff);
+          position: relative;
+          box-shadow: inset 0 0 0 6px rgba(255,255,255,0.18);
+        }
+
+        .album::before {
+          content: "";
+          position: absolute;
+          inset: 12px;
+          border-radius: 50%;
+          border: 4px solid rgba(255,255,255,0.7);
+        }
+
+        .song-meta {
+          font-size: 0.9rem;
+          color: var(--text-soft);
+        }
+
+        .song-meta strong {
+          display: block;
+          font-size: 1.1rem;
+          color: var(--text);
+          margin-bottom: 2px;
+        }
+
+        .play {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #f7c7ff, #aa7ae9);
+          display: grid;
+          place-items: center;
+          color: white;
+          font-size: 0.85rem;
+          box-shadow: 0 12px 20px rgba(170, 122, 233, 0.22);
+        }
+
+        .room-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+          padding: 16px 18px 18px;
+        }
+
+        .room-card {
+          border-radius: 18px;
+          background: rgba(255,255,255,0.82);
+          border: 1px solid rgba(163, 111, 214, 0.12);
+          padding: 12px;
+          min-height: 120px;
+        }
+
+        .mini-visual {
+          height: 60px;
+          border-radius: 14px;
+          background: linear-gradient(135deg, #ffd7ae, #f4d5ff, #d7c5ff);
+          margin-bottom: 10px;
+        }
+
+        .pill {
+          padding: 6px 8px;
+          border-radius: 999px;
+          background: #f5ebff;
+          color: var(--purple);
+          font-size: 0.7rem;
+          font-weight: 700;
+          display: inline-block;
+        }
+
+        section {
+          padding: 30px 0;
+        }
+
+        .section-header {
+          margin-bottom: 28px;
+          text-align: center;
+        }
+
+        .section-header h2 {
+          margin: 0 0 10px;
+          font-size: clamp(2rem, 4vw, 2.8rem);
+          letter-spacing: -0.04em;
+        }
+
+        .section-header p {
+          margin: 0 auto;
+          color: var(--text-soft);
+          max-width: 700px;
+        }
+
+        .feature-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 22px;
+        }
+
+        .feature-card {
+          background: var(--panel);
+          border: 1px solid var(--line);
+          border-radius: 26px;
+          padding: 26px 22px;
+          box-shadow: 0 12px 28px rgba(115, 88, 155, 0.04);
+        }
+
+        .feature-icon {
+          width: 58px;
+          height: 58px;
+          border-radius: 18px;
+          display: grid;
+          place-items: center;
+          font-size: 1.5rem;
+          margin-bottom: 18px;
+          background: linear-gradient(135deg, #ffe6f5, #f4e6ff);
+          box-shadow: inset 0 0 0 1px rgba(154, 98, 214, 0.06);
+        }
+
+        .feature-card h3 {
+          margin: 0 0 10px;
+          font-size: 1.2rem;
+        }
+
+        .feature-card p {
+          margin: 0;
+          color: var(--text-soft);
+          font-size: 0.96rem;
+        }
+
+        .feature-split {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+          margin-top: 30px;
+        }
+
+        .showcase {
+          background: linear-gradient(135deg, #fff8fd, #ffffff 35%, #faf4ff 100%);
+          border: 1px solid var(--line);
+          border-radius: 28px;
+          overflow: hidden;
+          box-shadow: var(--shadow);
+        }
+
+        .showcase-visual {
+          min-height: 320px;
+          background: linear-gradient(135deg, #f8d0ff, #e7ddff 50%, #ffe5cb);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .showcase-visual::before,
+        .showcase-visual::after {
+          content: "";
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.22);
+        }
+
+        .showcase-visual::before {
+          width: 220px;
+          height: 220px;
+          left: -30px;
+          bottom: -60px;
+        }
+
+        .showcase-visual::after {
+          width: 210px;
+          height: 210px;
+          right: -36px;
+          top: -28px;
+        }
+
+        .device-preview {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: min(280px, 72%);
+          background: rgba(255,255,255,0.86);
+          border: 1px solid rgba(137, 95, 196, 0.08);
+          border-radius: 28px;
+          box-shadow: 0 26px 50px rgba(90, 56, 135, 0.18);
+          padding: 18px;
+          backdrop-filter: blur(8px);
+        }
+
+        .preview-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 12px;
+          font-weight: 700;
+          color: var(--purple-deep);
+        }
+
+        .preview-bar {
+          display: grid;
+          gap: 10px;
+        }
+
+        .preview-bar div {
+          height: 18px;
+          border-radius: 999px;
+          background: linear-gradient(90deg, #f8d3ff, #d9d0ff, #ffd9b4);
+        }
+
+        .preview-list {
+          margin-top: 16px;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+        }
+
+        .preview-list span {
+          display: block;
+          height: 84px;
+          border-radius: 16px;
+          background: linear-gradient(180deg, #ffe6f8, #e9deff 100%);
+        }
+
+        .ver-list {
+          display: grid;
+          gap: 18px;
+          padding: 28px;
+        }
+
+        .ver-item {
+          display: grid;
+          grid-template-columns: 54px 1fr;
+          gap: 16px;
+          align-items: start;
+          padding: 18px 18px 12px;
+          border-radius: 20px;
+          background: #fff;
+          border: 1px solid var(--line);
+        }
+
+        .ver-num {
+          width: 54px;
+          height: 54px;
+          border-radius: 18px;
+          display: grid;
+          place-items: center;
+          background: linear-gradient(135deg, #f6d5ff, #dcb6ff);
+          color: var(--purple-deep);
+          font-weight: 800;
+          font-size: 1.2rem;
+        }
+
+        .ver-item h3 {
+          margin: 0 0 8px;
+          font-size: 1.1rem;
+        }
+
+        .ver-item p {
+          margin: 0;
+          color: var(--text-soft);
+          font-size: 0.95rem;
+        }
+
+        .download {
+          background: linear-gradient(135deg, #f8dcff, #f2ecff 40%, #fff0e3 100%);
+          padding: 36px 0 60px;
+        }
+
+        .download-panel {
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          align-items: center;
+          gap: 18px;
+          border: 1px solid rgba(154, 98, 214, 0.12);
+          border-radius: 30px;
+          background: rgba(255,255,255,0.72);
+          padding: 26px 28px;
+          box-shadow: var(--shadow);
+        }
+
+        .download h2 {
+          margin: 0 0 8px;
+          font-size: clamp(2rem, 4vw, 2.8rem);
+          line-height: 1.15;
+          letter-spacing: -0.05em;
+        }
+
+        .download p {
+          margin: 0;
+          color: var(--text-soft);
+        }
+
+        .download-cta {
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .cta-card {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px 20px;
+          border-radius: 20px;
+          background: linear-gradient(135deg, #b57ae8, #8b5dd5);
+          color: white;
+          box-shadow: 0 16px 24px rgba(140, 93, 213, 0.24);
+          font-weight: 800;
+        }
+
+        .bottom-note {
+          margin-top: 26px;
+          text-align: center;
+          font-size: 0.86rem;
+          color: var(--text-soft);
+        }
+
+        footer {
+          padding: 28px 0 52px;
+          text-align: center;
+          color: var(--text-soft);
+          font-size: 0.92rem;
+        }
+
+        @media (max-width: 980px) {
+          .hero-inner,
+          .feature-split,
+          .download-panel {
+            grid-template-columns: 1fr;
+          }
+
+          .feature-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .download-cta {
+            justify-content: flex-start;
+          }
+        }
+
+        @media (max-width: 620px) {
+          .nav {
+            flex-wrap: wrap;
+            padding: 12px 0;
+          }
+
+          .nav-links {
+            width: 100%;
+            justify-content: space-between;
+          }
+
+          .feature-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .cta-row {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .btn {
+            width: 100%;
+          }
+
+          .phone-wrap {
+            min-height: 500px;
+          }
+        }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">StarMeet 星遇</div>
-        <div class="nav-link">
-            <a href="#feature">功能</a>
-            <a href="#about">关于</a>
+    <header>
+        <div class="container nav">
+            <a href="#top" class="brand" aria-label="StarMeet 首页">
+                <span class="brand-mark">✦</span>
+                <span>StarMeet 星遇</span>
+            </a>
+            <nav class="nav-links" aria-label="主导航">
+                <a href="#home">首页</a>
+                <a href="#features">功能</a>
+                <a href="#showcase">体验</a>
+                <a href="#download">下载</a>
+                <a href="about.html">关于我们</a>
+            </nav>
+            <a class="nav-cta" href="#download">立即体验</a>
         </div>
-    </nav>
+    </header>
 
-    <div class="hero">
-        <h1>星遇 · 遇见同好</h1>
-        <p>集K歌、直播、短视频、交友于一体的娱乐社交原型项目</p>
-        <a class="btn" href="#feature">查看功能</a>
-    </div>
+    <main id="home">
+        <section class="hero">
+            <div class="container hero-inner">
+                <div>
+                    <div class="eyebrow">社交 · K歌 · 直播</div>
+                    <h1>在 <span class="headline-highlight">声音</span> 里遇见同频的人</h1>
+                    <p class="subtitle">
+                        StarMeet 星遇，是一款以音乐、直播和社交互动为核心的年轻人兴趣社区原型应用。
+                        在这里，人们可以一起K歌、看直播、刷短视频和结识志同道合的朋友。
+                    </p>
 
-    <div class="container" id="feature">
-        <h2 class="section-title">核心功能</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>在线K歌房</h3>
-                <p>多人一起点歌唱歌，轻松互动。</p>
-            </div>
-            <div class="card">
-                <h3>实时直播</h3>
-                <p>开播分享，和好友实时聊天。</p>
-            </div>
-            <div class="card">
-                <h3>短视频浏览</h3>
-                <p>刷精彩片段，发现有趣内容。</p>
-            </div>
-            <div class="card">
-                <h3>交友互动</h3>
-                <p>认识新朋友，一起娱乐。</p>
-            </div>
-        </div>
-    </div>
+                    <div class="cta-row">
+                        <a class="btn btn-primary" href="#download">下载原型包</a>
+                        <a class="btn btn-secondary" href="about.html">了解更多</a>
+                    </div>
 
-    <div class="container" id="about">
-        <div class="card">
-            <h3>项目说明</h3>
-            <p>StarMeet 星遇仅为技术学习演示原型，不对外商用，部署于 GitHub Pages。</p>
-        </div>
-    </div>
+                    <div class="mini-stats" aria-label="产品数据概览">
+                        <div>
+                            <strong>1.2M+</strong>
+                            <span>活跃用户</span>
+                        </div>
+                        <div>
+                            <strong>80K+</strong>
+                            <span>每日直播</span>
+                        </div>
+                        <div>
+                            <strong>4.9/5</strong>
+                            <span>用户评分</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phone-wrap" aria-hidden="true">
+                    <div class="glow"></div>
+                    <div class="phone">
+                        <div class="screen">
+                            <div class="topbar">
+                                <span>9:41</span>
+                                <div class="dots"><span></span><span></span><span></span></div>
+                            </div>
+
+                            <div class="avatar-band">
+                                <div class="avatar"></div>
+                                <div class="person-card">
+                                    <div class="tag">在线 · 28.6K</div>
+                                    <div style="font-weight: 800; margin-top: 8px;">夜色陪唱会</div>
+                                </div>
+                            </div>
+
+                            <div class="song-card">
+                                <div class="album"></div>
+                                <div class="song-meta">
+                                    <strong>《晚风说》</strong>
+                                    <span>正在热唱中</span>
+                                </div>
+                                <div class="play">▶</div>
+                            </div>
+
+                            <div class="room-grid">
+                                <div class="room-card">
+                                    <div class="mini-visual"></div>
+                                    <div class="pill">K歌房</div>
+                                </div>
+                                <div class="room-card">
+                                    <div class="mini-visual" style="background: linear-gradient(135deg, #ffdfe4, #f1d7ff, #e0ddff);"></div>
+                                    <div class="pill">直播间</div>
+                                </div>
+                                <div class="room-card">
+                                    <div class="mini-visual" style="background: linear-gradient(135deg, #dfffe9, #dfe8ff, #ffe9d3);"></div>
+                                    <div class="pill">短视频</div>
+                                </div>
+                                <div class="room-card">
+                                    <div class="mini-visual" style="background: linear-gradient(135deg, #fff1d9, #ffd9f0, #ebd8ff);"></div>
+                                    <div class="pill">社交圈</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>聚焦真实连接的社交娱乐场景</h2>
+                    <p>从音乐、直播到朋友圈互动，StarMeet 打造轻松、青春、温暖的线上相遇体验。</p>
+                </div>
+
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">🎤</div>
+                        <h3>在线K歌</h3>
+                        <p>多人互动合唱、语音连麦、选择自己喜欢的音乐氛围，让表达更自然。</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">📡</div>
+                        <h3>直播互动</h3>
+                        <p>主播现场演唱、弹幕互动、礼物打赏，打造热闹而有趣的线上社交情绪。</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">🎞️</div>
+                        <h3>短视频</h3>
+                        <p>发现当下最热内容、灵感视频与生活碎片，让每个人都能成为内容的发布者。</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>兴趣社交</h3>
+                        <p>根据音乐偏好、地域标签和社交圈推荐同频好友，拉近真实交流的距离。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="showcase">
+            <div class="container">
+                <div class="section-header">
+                    <h2>一站式娱乐，新鲜感与陪伴感兼具</h2>
+                    <p>让用户在不费力的日常体验中，发现更多趣味、更多连接和更多“偶遇”。</p>
+                </div>
+
+                <div class="feature-split">
+                    <div class="showcase">
+                        <div class="showcase-visual">
+                            <div class="device-preview">
+                                <div class="preview-row">
+                                    <span>推荐</span>
+                                    <span>LIVE</span>
+                                </div>
+                                <div class="preview-bar">
+                                    <div style="width: 80%"></div>
+                                    <div style="width: 60%"></div>
+                                    <div style="width: 88%"></div>
+                                </div>
+                                <div class="preview-list">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ver-list">
+                        <div class="ver-item">
+                            <div class="ver-num">01</div>
+                            <div>
+                                <h3>轻松开唱</h3>
+                                <p>用户可快速加入房间，依照心情切换音乐风格，随时开启互动模式。</p>
+                            </div>
+                        </div>
+
+                        <div class="ver-item">
+                            <div class="ver-num">02</div>
+                            <div>
+                                <h3>共享热情</h3>
+                                <p>弹幕、点赞、礼物和连麦机制，提升直播现场的参与感和归属感。</p>
+                            </div>
+                        </div>
+
+                        <div class="ver-item">
+                            <div class="ver-num">03</div>
+                            <div>
+                                <h3>认识新朋友</h3>
+                                <p>从相同兴趣出发，建立真实社交连接，创造让人愿意停留的社区氛围。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="download" id="download">
+            <div class="container">
+                <div class="download-panel">
+                    <div>
+                        <h2>让好声音和好朋友，先从这里开始</h2>
+                        <p>StarMeet 星遇是一款适合展示与演示的原型产品，帮助你快速呈现“社交K歌直播”的产品方向与简洁体验。</p>
+                    </div>
+
+                    <div class="download-cta">
+                        <a class="cta-card" href="#top">⬇ 下载原型包</a>
+                    </div>
+                </div>
+
+                <p class="bottom-note">说明：本项目仅用于产品展示与学习演示，不包含支付、登录后台及商业闭环。</p>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        StarMeet © 2026 | Demo Project For Learning
+        © 2026 StarMeet 星遇 · 社交K歌直播原型展示
     </footer>
 </body>
 </html>
